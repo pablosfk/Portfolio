@@ -1,5 +1,4 @@
 def insertion(list):
-    aux = 0
     for i in range(len(list)):
         if i>0: #It does not work with the first number, we need at least 2 to can compare them
             if list[i]<list[i-1]: #Chek if the current number is less than the left one.
@@ -15,9 +14,33 @@ def insertion(list):
 
 
 '''
-lista = [39, 83, 37, 18, 73, 52, 1, 26, 76, 67, 20, 10, 62, 28, 82, 91, 81, 50, 72, 89, 29, 1]
+lista = [39, 83, 37, 18, -12, 73, 52, 1, 26, 76, 67, 20, 10, -3, 62, 28, 82, 91, 81, -58, 50, 72, 89, 29, 1]
 lista1 = ['boca', 'carreta', 'jalea', 'altura', 'zorra', 'corral', 'batata']
+print(insertion(lista))
 print(insertion(lista1))
 '''
 
+
+def selection(list):
+    length = len(list)
+    for i in range(length):
+        aux = list[i]
+        j_aux = i
+        for j in range(i, length):
+            print(j)
+            if list[j] < aux:
+                aux = list[j]
+                j_aux = j
+        if list[j_aux] != list[i]:
+            list[j_aux] = list[i]
+            list[i] = aux
+    return(list)
+
+
+'''
+lista = [39, 83, 37, 18, -12, 73, 52, 1, 26, 76, 67, 20, 10, -3, 62, 28, 82, 91, 81, -58, 50, 72, 89, 29, 1]
+lista1 = ['boca', 'carreta', 'jalea', 'altura', 'zorra', 'corral', 'batata']
+print(selection(lista))
+print(selection(lista1))
+'''
 
