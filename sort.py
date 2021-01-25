@@ -109,13 +109,13 @@ def merge(list):
                     sum = 0 #This variable will tell us the point we are in the list
                     for k in range(j):
                         sum += divisions[k] #Here we calculate the current position
-                    list_aux = [list[sum+divisions[j]]] #We take the first value of the second block and put it first in auxiliar list
+                    list_aux = [list[sum+divisions[j]]] #We take the first value of the second block and put it first in auxiliary list
                     list.pop(sum+divisions[j]) #We pop it
                     l = divisions[j] #Number of values in block 1.
                     m = divisions[j+1]-1 #Number of values in block 2.
                     while l != 0 and m != 0:
                         if m == 0 or list[sum] <= list[sum+l]: #We study if first value from first block is less than first value of second block
-                            for n in range(len(list_aux)): #The we study where it must be put in the auxiliar vector
+                            for n in range(len(list_aux)): #The we study where it must be put in the auxiliary vector
                                 if list[sum] <= list_aux[n]:
                                     list_aux.insert(n, list[sum])
                                     break
@@ -124,7 +124,7 @@ def merge(list):
                             list.pop(sum)
                             l -= 1
                         elif l == 0 or list[sum] >= list[sum+l]:
-                            for n in range(len(list_aux)): #The we study where it must be put in the auxiliar vector
+                            for n in range(len(list_aux)): #The we study where it must be put in the auxiliary vector
                                 if list[sum+l] <= list_aux[n]:
                                     list_aux.insert(n, list[sum+l])
                                     break
@@ -133,7 +133,7 @@ def merge(list):
                             list.pop(sum+l)
                             m -= 1
                     list_aux.reverse()
-                    for o in list_aux: #here we insert the ordered values in auxiliar list into the real list
+                    for o in list_aux: #here we insert the ordered values in auxiliary list into the real list
                         list.insert(sum, o)
                     divisions[j] = divisions[j] + divisions[j+1]
                     divisions.pop(j+1)
@@ -149,4 +149,55 @@ print(merge(lista1))
 '''
 
 
+def quick(list):
+    def sort(list,lim_inf,lim_sup):
+        if lim_inf != lim_sup:
+            pivot = (lim_sup + lim_inf)//2
+            pos = lim_inf
+            lim_sup_aux = lim_sup
+            pivot_quantity = 1
+            while pos != lim_sup_aux+1:     # Through the whole list between lim_inf and lim_sup
+                if pos < pivot and list[pos] > list[pivot]:
+                    list.insert(lim_sup_aux+1, list[pos])  # Put the value at the end of the entered list
+                    list.pop(pos)   # Eliminate the value
+                    pos -= 1    # Correction of the position, due to the eliminated value we must stay in that place.
+                    lim_sup_aux -= 1    # Correction of the end of the stretch, because we moved something to the end,
+                    # we do not need to revisit it again
+                    pivot -= 1     # Due to the eliminated value at left of pivot, we must move it
+                elif pos > pivot and list[pos] < list[pivot]:
+                    list.insert(lim_inf, list[pos])  # Put the value at the start of the entered list
+                    list.pop(pos+1)   # Eliminate the value
+                    pivot += 1     # Due to the inserted value at left of pivot, we must move it
+                elif list[pos] == list[pivot] and pos != pivot:
+                    pivot_quantity += 1
+                    if pos < pivot:
+                        list.insert(pivot, list[pos])
+                        list.pop(pos)  # Eliminate the value
+                        pos -= 1  # Correction of the position, due to the eliminated value we must stay in that place.
+                        pivot -= 1  # Due to the eliminated value at left of pivot, we must move it
+                    if pos > pivot:
+                        list.insert(pivot, list[pos])
+                        list.pop(pos + 1)  # Eliminate the value
+                pos += 1
+            if pivot > lim_inf:
+                lim_inf1 = lim_inf
+                lim_sup1 = pivot - 1
+                sort(list, lim_inf1, lim_sup1)
+            if pivot < lim_sup:
+                lim_inf2 = pivot + pivot_quantity
+                lim_sup2 = lim_sup
+                sort(list, lim_inf2, lim_sup2)
+
+    lim_inf = 0
+    lim_sup = len(list)-1
+    sort(list, lim_inf, lim_sup)
+    return list
+
+
+'''
+lista = [39, 83, 37, 18, -12, 73, 52, 1, 26, 76, 67, 20, 10, -3, 62, 28, 82, 91, 81, -58, 50, 72, 89, 29, 1]
+lista1 = ['boca', 'carreta', 'jalea', 'altura', 'zorra', 'corral', 'batata']
+print(quick(lista))
+print(quick(lista1))
+'''
 
