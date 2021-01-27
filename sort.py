@@ -201,3 +201,27 @@ print(quick(lista))
 print(quick(lista1))
 '''
 
+
+def counting(list):
+    aux = []
+    list_aux = []
+    for i in range(max(list)+1):
+        aux.append(0)
+    for i in range(len(list)):
+        list_aux.append(0)
+    for i in list:
+        aux[i] += 1
+    temp = aux[0]
+    for i in range(len(aux)-1):
+        aux[i+1] += temp
+        temp = aux[i+1]
+    for i in list:
+        list_aux[aux[i]-1] = i
+        aux[i] -= 1
+
+    return list_aux
+
+'''
+list = [1, 3, 8, 1, 2, 4, 5, 2, 1, 9, 1,  2,  0, 0]
+print(counting(list))
+'''
