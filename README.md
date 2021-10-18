@@ -16,7 +16,7 @@ Codes made in Python practices.
   3. Depth First Search - DFSearch(dict, start, end)
   4. Breadth First Search - BFSearch(dict, start, end)
 
-# sort.py
+# array.py
   1. Kadane's Algorithm - kadane(sequence)
   2. Tortoise and hare Floyd's Algorithm - floyd(sequence)
   3. KMP Algorithm - kmp(sequence, pattern)
