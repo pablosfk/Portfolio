@@ -30,7 +30,7 @@ def selection(list):
         aux = list[i]
         j_aux = i
         for j in range(i, length):
-            print(j)
+            #print(j)
             if list[j] < aux:
                 aux = list[j]
                 j_aux = j
